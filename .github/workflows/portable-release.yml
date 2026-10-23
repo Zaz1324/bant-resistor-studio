@@ -1,0 +1,57 @@
+name: Portable Windows release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Kaynak kodu al
+        uses: actions/checkout@v4
+
+      - name: Node.js kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Rust MSVC hedefini hazırla
+        shell: pwsh
+        run: |
+          rustup default stable-x86_64-pc-windows-msvc
+          rustup target add x86_64-pc-windows-msvc
+
+      - name: Bağımlılıkları kur ve test et
+        shell: pwsh
+        run: |
+          npm ci
+          npm test
+
+      - name: Taşınabilir EXE derle
+        shell: pwsh
+        run: npm run tauri -- build --no-bundle --target x86_64-pc-windows-msvc
+
+      - name: Tek dosyayı hazırla
+        shell: pwsh
+        run: |
+          $version = node -p "require('./package.json').version"
+          if ($env:GITHUB_REF_NAME -ne "v$version") { throw 'Etiket ve uygulama sürümü uyuşmuyor.' }
+          $asset = "Bant_${version}_x64.exe"
+          Copy-Item -LiteralPath 'src-tauri/target/x86_64-pc-windows-msvc/release/bant.exe' -Destination $asset
+          if (-not (Test-Path -LiteralPath $asset)) { throw 'EXE oluşturulamadı.' }
+          "BANT_ASSET=$asset" | Add-Content -LiteralPath $env:GITHUB_ENV
+          $hash = (Get-FileHash -LiteralPath $asset -Algorithm SHA256).Hash
+          "SHA-256: $hash" | Set-Content -LiteralPath 'release-notes.txt' -Encoding utf8
+          "Windows 10/11 x64 için taşınabilir sürüm. EXE dosyasını indirip doğrudan çalıştırın. Kurulum gerekmez. WebView2 Runtime gerekir. Favoriler kullanıcı verisi klasöründe korunur.`n`nKod imzası yoktur; Windows ilk açılışta SmartScreen uyarısı gösterebilir.`n" | Add-Content -LiteralPath 'release-notes.txt' -Encoding utf8
+
+      - name: GitHub sürümünü yayımla
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create $env:GITHUB_REF_NAME $env:BANT_ASSET --title "Bant $($env:GITHUB_REF_NAME.TrimStart('v'))" --notes-file 'release-notes.txt' --verify-tag

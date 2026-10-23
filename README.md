@@ -11,19 +11,15 @@ npm run desktop:dev
 
 Tarayıcıda arayüzü görmek için `npm run dev` yeterlidir. PNG kaydetme tarayıcıda indirme olarak, Tauri içinde yerel dosya seçicisiyle çalışır.
 
-## Windows kurulum dosyası
+## Windows'ta doğrudan kullanma
 
-Windows kurulum dosyası GitHub deposunun **Releases** bölümünde yayımlanır. Windows 64 bit üzerinde dosyayı çalıştırıp kurulum adımlarını izleyin. Her sürümün SHA-256 değeri kurulum dosyasıyla birlikte verilir.
+[Releases](https://github.com/Zaz1324/bant-resistor-studio/releases) bölümünden yalnızca `Bant_1.1.1_x64.exe` dosyasını indirin ve açın. Kurulum veya kaynak kodu indirmek gerekmez. Windows 10/11 x64 ve WebView2 Runtime gerekir; güncel Windows bilgisayarlarda WebView2 genellikle zaten bulunur. Eksikse [Microsoft'un WebView2 Runtime yükleyicisi](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) kurulmalıdır. Uygulama işlevleri çevrimdışı çalışır.
 
-Yeni kurulum aynı ürün adı ve uygulama kimliğiyle eski sürümün yerini alır. 1.1.0'dan itibaren favoriler Tauri'nin uygulama veri klasöründeki `bant-library.json` dosyasında tutulur. Dosyada sürümlü veri yapısı ve kalıcı bir kurulum kimliği bulunur; sonraki sürüm bu dosyayı açarak favorileri otomatik kullanır. 1.0.0 ve 1.0.1 sürümlerinde favori kaydı olmadığı için onlardan aktarılacak favori verisi yoktur. Kurulum kimliği gizli anahtar veya lisans doğrulaması değildir.
+Favoriler 1.1.0'dan itibaren Tauri'nin uygulama veri klasöründeki `bant-library.json` dosyasında saklanır. Aynı uygulama kimliğiyle yeni EXE dosyası açıldığında kayıtlar kullanılmaya devam eder. Dosyadaki kurulum kimliği gizli anahtar veya lisans doğrulaması değildir.
 
-Rust MSVC, Microsoft C++ Build Tools ve WebView2 geliştirme önkoşulları kurulduktan sonra:
+Derleme için Rust MSVC, Microsoft C++ Build Tools ve Node.js gerekir. `npm ci` ardından `npm run desktop:build` komutu `src-tauri/target/release/bant.exe` dosyasını oluşturur. GitHub sürümleri Windows üzerinde aynı adımları test ederek otomatik derler. Kaynak kodu edinirken `node_modules`, `dist` ve `src-tauri/target` klasörleri gerekli değildir; bunlar yerel derlemede yeniden oluşur.
 
-```powershell
-npm run desktop:build
-```
-
-NSIS kurulum dosyası `src-tauri/target/release/bundle/nsis/` içinde oluşur. Uygulama çevrimdışı çalışır. WebView2 bu Windows kurulumunda zaten mevcut; eksik olan bir bilgisayarda paketteki WebView2 önyükleyicisi çalışma zamanını kurmak için internet bağlantısı ister. Kurulum dosyası kod imzası taşımaz; Windows SmartScreen ilk çalıştırmada uyarı gösterebilir.
+EXE henüz kod imzası taşımaz; Windows SmartScreen ilk açılışta uyarı gösterebilir. Release açıklamasındaki SHA-256 değeri indirdiğiniz dosyanın bütünlüğünü kontrol etmek içindir.
 
 ## Hesaplama
 

@@ -25,7 +25,7 @@ Bilgisayarda çevrimdışı çalışan, proje sırasında hızlıca başvurulan 
 - Hedef değer araması E24 serisini varsayılan kullanır ve tüm geçerli kombinasyonlara geçebilir.
 - Kullanıcı Windows bilgisayarına kurulabilir Tauri uygulaması istemiştir.
 - Dirençler ad ve kategoriyle favorilere kaydedilir; kayıtlar sürüm güncellemesinde aynı uygulama veri klasöründen yüklenir.
-- Dağıtım kurulum dosyasıyla yapılır; özgün kaynak kodu özel tutulur.
+- Dağıtım GitHub Releases üzerinde tek taşınabilir Windows EXE dosyasıyla yapılır; kaynak kodu incelemeye açıktır ve kullanım izni özel lisansla sınırlandırılır.
 - Ürün adı ve görsel kimlik uygulama içinde çalışma adı olarak seçilmiştir; kullanıcı tarafından verilmemiştir.
 
 ## Product Principles

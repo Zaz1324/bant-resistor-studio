@@ -2,7 +2,7 @@
   "name": "bant-resistor-studio",
   "private": true,
   "license": "UNLICENSED",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "desktop:dev": "tauri dev",
-    "desktop:build": "tauri build"
+    "desktop:build": "tauri build --no-bundle"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.8.0",
