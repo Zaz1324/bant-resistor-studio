@@ -2,7 +2,7 @@
 name = "bant"
 version = "1.1.0"
 description = "Dört ve beş bantlı direnç renk kodu aracı"
-license = "MIT"
+license = "UNLICENSED"
 authors = ["Bant"]
 edition = "2021"
 

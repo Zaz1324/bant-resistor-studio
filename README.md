@@ -31,8 +31,8 @@ Dört bantta ilk iki bant anlamlı rakamları, üçüncü çarpanı, dördüncü
 
 Renk ve standart seri eşlemeleri: [Vishay direnç renk kodu tablosu](https://www.vishay.com/docs/49411/resistor_color_code_calculator.pdf), [Vishay standart değer serileri](https://www.vishay.com/docs/20143/colorcod.pdf).
 
-## Açık kaynak
+## Lisans
 
-Bu proje [MIT Lisansı](LICENSE) ile yayımlanır. Katkı sahipleri: [fx-82MS](https://github.com/fx-82MS) ve Bant contributors.
+Bu proje kaynak kodu incelenebilir olarak yayımlanır; [Bant Kullanım Lisansı](LICENSE) yazılımın değiştirilmemiş hâlinin kullanılmasına izin verir. Kaynak kodun değiştirilmesi, yeniden kullanılması ve dağıtılması yasaktır. Katkı sahipleri: [fx-82MS](https://github.com/fx-82MS) ve Bant contributors.
 
 Kurulum dosyası kaynak dosyalarını içermez; masaüstü HTML/JavaScript paketleri teknik olarak incelenebilir. Üçüncü taraf bileşenlerin kendi lisansları geçerlidir.

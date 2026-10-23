@@ -1,21 +1,22 @@
-MIT License
+BANT KULLANIM LİSANSI, SÜRÜM 1.0
 
-Copyright (c) 2026 Bant contributors
+Telif Hakkı (c) 2026 Bant contributors. Tüm hakları saklıdır.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Bu yazılımın değiştirilmemiş hâlini, yasal amaçlarla kullanma izni verilir.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Bu izin; yazılımı, kaynak kodunu veya türevlerini kopyalama, değiştirme,
+birleştirme, yeniden yayımlama, dağıtma, alt lisanslama, satma, kiralama ya
+da üçüncü kişilere kullandırma hakkı vermez.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Kaynak kodun depoda görünür olması yalnızca inceleme ve güven amacı taşır;
+bu durum, kaynak kodun değiştirilmesi veya yeniden kullanılması için ek bir
+izin oluşturmaz.
+
+Bu telif hakkı ve lisans bildirimi yazılımla birlikte korunmalıdır.
+
+YAZILIM, TİCARETE ELVERİŞLİLİK, BELİRLİ BİR AMACA UYGUNLUK VE İHLAL
+ETMEMEYE İLİŞKİN ZIMNİ GARANTİLER DAHİL OLMAK ÜZERE HİÇBİR AÇIK VEYA ZIMNİ
+GARANTİ VERİLMEKSİZİN "OLDUĞU GİBİ" SAĞLANIR. HİÇBİR DURUMDA TELİF HAKKI
+SAHİPLERİ, YAZARLAR VEYA KATKI SAHİPLERİ; YAZILIMIN KULLANILMASIYLA VEYA
+KULLANILAMAMASIYLA BAĞLANTILI TALEP, ZARAR YA DA DİĞER YÜKÜMLÜLÜKLERDEN
+SORUMLU TUTULAMAZ.

@@ -1,7 +1,7 @@
 {
   "name": "bant-resistor-studio",
   "private": true,
-  "license": "MIT",
+  "license": "UNLICENSED",
   "version": "1.1.0",
   "type": "module",
   "scripts": {
