@@ -31,7 +31,7 @@ GitHub'da yayınlanacak yükleyici ve içindeki uygulama EXE'si güvenilir bir y
 
 ## Hesaplama
 
-Dört bantta ilk iki bant anlamlı rakamları, üçüncü çarpanı, dördüncü toleransı belirler. Renksiz tolerans bandı ±20% olarak hesaplanır. Beş bantta ilk üç bant anlamlı rakamları, dördüncü çarpanı, beşinci toleransı belirler. Arama, hedef ohm değerinin nominal değerin tolerans aralığında kalması koşulunu kullanır. E24 varsayılandır; “Tüm değerler” seçeneği seçilen bant sayısına göre geçerli renk kombinasyonlarını tarar. Arama sonuçları gerçek stok garantisi değildir.
+Dört bantta ilk iki bant anlamlı rakamları, üçüncü çarpanı, dördüncü toleransı belirler. Renksiz tolerans bandı ±20% olarak hesaplanır. Beş bantta ilk üç bant anlamlı rakamları, dördüncü çarpanı, beşinci toleransı belirler. Arama, hedef ohm değerinin nominal değerin tolerans aralığında kalması koşulunu kullanır. E24 varsayılandır; E96, üç anlamlı rakam gerektirdiği için yalnızca beş bantta seçilebilir. “Tüm değerler” seçeneği seçilen bant sayısına göre geçerli renk kombinasyonlarını tarar. Arama sonuçları gerçek stok garantisi değildir.
 
 Renk ve standart seri eşlemeleri: [Vishay direnç renk kodu tablosu](https://www.vishay.com/docs/49411/resistor_color_code_calculator.pdf), [Vishay standart değer serileri](https://www.vishay.com/docs/20143/colorcod.pdf).
 

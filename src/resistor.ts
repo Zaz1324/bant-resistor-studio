@@ -2,7 +2,7 @@ export type ColorKey = 'black' | 'brown' | 'red' | 'orange' | 'yellow' | 'green'
 export type ToleranceKey = Exclude<ColorKey, 'black' | 'orange' | 'yellow' | 'white' | 'pink'> | 'none';
 export type BandCount = 4 | 5;
 export type Bands = ColorKey[];
-export type Series = 'e24' | 'all';
+export type Series = 'e24' | 'e96' | 'all';
 
 export interface ResistorColor {
   key: ColorKey;
@@ -99,11 +99,20 @@ export function formatOhms(value: number): string {
 }
 
 export const E24 = [10, 11, 12, 13, 15, 16, 18, 20, 22, 24, 27, 30, 33, 36, 39, 43, 47, 51, 56, 62, 68, 75, 82, 91];
+export const E96 = [
+  100, 102, 105, 107, 110, 113, 115, 118, 121, 124, 127, 130, 133, 137, 140, 143,
+  147, 150, 154, 158, 162, 165, 169, 174, 178, 182, 187, 191, 196, 200, 205, 210,
+  215, 221, 226, 232, 237, 243, 249, 255, 261, 267, 274, 280, 287, 294, 301, 309,
+  316, 324, 332, 340, 348, 357, 365, 374, 383, 392, 402, 412, 422, 432, 442, 453,
+  464, 475, 487, 499, 511, 523, 536, 549, 562, 576, 590, 604, 619, 634, 649, 665,
+  681, 698, 715, 732, 750, 768, 787, 806, 825, 845, 866, 887, 909, 931, 953, 976,
+];
 
 export function searchResistors(targetOhms: number, series: Series, toleranceColor: ToleranceKey, bandCount: BandCount = 5): Resistor[] {
-  if (bandCount === 5 && toleranceColor === 'none') return [];
+  if ((bandCount === 5 && toleranceColor === 'none') || (bandCount === 4 && series === 'e96')) return [];
   const significands = series === 'e24'
     ? (bandCount === 4 ? E24 : E24.map(value => value * 10))
+    : series === 'e96' ? E96
     : Array.from({ length: bandCount === 4 ? 90 : 900 }, (_, i) => i + (bandCount === 4 ? 10 : 100));
   const tolerance = toleranceFor(toleranceColor);
   const results: Resistor[] = [];

@@ -150,7 +150,7 @@ function finderView(): string {
           <div class="value-field"><input id="target-value" name="target" type="text" inputmode="decimal" value="${escapeHtml(state.searchValue)}" autocomplete="off" aria-describedby="target-help"/><select id="unit" name="unit" aria-label="Birim"><option value="1" ${state.unit === 1 ? 'selected' : ''}>Ω</option><option value="1000" ${state.unit === 1e3 ? 'selected' : ''}>kΩ</option><option value="1000000" ${state.unit === 1e6 ? 'selected' : ''}>MΩ</option></select></div>
           <p id="target-help" class="field-hint">Örnek: 4700 Ω veya 4,7 kΩ</p>
           <div class="finder-fields"><div><label class="field-label" for="finder-band-count">Bant sayısı</label><select id="finder-band-count" name="bandCount" class="select-field"><option value="4" ${state.bandCount === 4 ? 'selected' : ''}>4 bant</option><option value="5" ${state.bandCount === 5 ? 'selected' : ''}>5 bant</option></select></div>
-          <div><label class="field-label" for="series">Değer serisi</label><select id="series" name="series" class="select-field"><option value="e24" ${state.series === 'e24' ? 'selected' : ''}>E24 · standart değerler</option><option value="all" ${state.series === 'all' ? 'selected' : ''}>Tüm geçerli değerler</option></select></div>
+          <div><label class="field-label" for="series">Değer serisi</label><select id="series" name="series" class="select-field"><option value="e24" ${state.series === 'e24' ? 'selected' : ''}>E24 · standart değerler</option><option value="e96" ${state.series === 'e96' ? 'selected' : ''} ${state.bandCount === 4 ? 'disabled' : ''}>E96 · hassas değerler (5 bant)</option><option value="all" ${state.series === 'all' ? 'selected' : ''}>Tüm geçerli değerler</option></select></div>
           <div><label class="field-label" for="tolerance">Tolerans</label><select id="tolerance" name="tolerance" class="select-field">${(state.bandCount === 4 ? TOLERANCE_OPTIONS : TOLERANCE_OPTIONS.filter(key => key !== 'none')).map(key => `<option value="${key}" ${state.toleranceColor === key ? 'selected' : ''}>±${colorByKey[key].tolerance}% · ${colorByKey[key].label}</option>`).join('')}</select></div></div>
           ${state.searchError ? `<p class="form-error" role="alert">${escapeHtml(state.searchError)}</p>` : ''}
           <button class="search-button" type="submit">Uygun dirençleri bul <span aria-hidden="true">→</span></button>
@@ -323,6 +323,7 @@ app.addEventListener('change', event => {
   const target = event.target as HTMLSelectElement;
   if (target.id === 'builder-band-count') {
     state.bandCount = Number(target.value) as BandCount;
+    if (state.bandCount === 4 && state.series === 'e96') state.series = 'e24';
     state.bands = [...(state.bandCount === 4 ? DEFAULT_FOUR_BANDS : DEFAULT_BANDS)];
     state.activeBand = 0;
     render();
@@ -330,6 +331,7 @@ app.addEventListener('change', event => {
   }
   if (target.id === 'finder-band-count') {
     state.bandCount = Number(target.value) as BandCount;
+    if (state.bandCount === 4 && state.series === 'e96') state.series = 'e24';
     state.bands = [...(state.bandCount === 4 ? DEFAULT_FOUR_BANDS : DEFAULT_BANDS)];
     state.activeBand = 0;
     if (state.bandCount === 5 && state.toleranceColor === 'none') state.toleranceColor = 'gold';
