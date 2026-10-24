@@ -2,6 +2,8 @@
 
 Dört ve beş bantlı dirençler için çevrimdışı renk kodu ve değer arama aracı. HTML, CSS ve TypeScript arayüzü Tauri 2 ile Windows masaüstüne paketlenir. Dirençler ad ve kategoriyle favorilere kaydedilebilir.
 
+> **Yayın durumu — 24 Ekim 2026:** GitHub'daki indirilebilir son sürüm `v1.1.1` taşınabilir EXE'dir. Dosya imzasızdır; Windows SmartScreen uyarısı gösterebilir ve bazı yönetilen bilgisayarlarda çalıştırılması engellenebilir. `v1.1.2` yükleyicisi henüz yalnızca imzasız CI test adayıdır; GitHub Release olarak yayımlanmamıştır.
+
 ## Çalıştırma
 
 ```powershell
@@ -13,13 +15,13 @@ Tarayıcıda arayüzü görmek için `npm run dev` yeterlidir. PNG kaydetme tara
 
 ## Windows'ta doğrudan kullanma
 
-[Releases](https://github.com/Zaz1324/bant-resistor-studio/releases) bölümündeki en güncel `Bant_*_x64.exe` dosyasını indirin ve açın. Kurulum veya kaynak kodu indirmek gerekmez. Windows 10/11 x64 ve WebView2 Runtime gerekir; güncel Windows bilgisayarlarda WebView2 genellikle zaten bulunur. Eksikse [Microsoft'un WebView2 Runtime yükleyicisi](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) kurulmalıdır. Uygulama işlevleri çevrimdışı çalışır.
+[Bant v1.1.1 sürümünden](https://github.com/Zaz1324/bant-resistor-studio/releases/tag/v1.1.1) `Bant_1.1.1_x64.exe` dosyasını indirin ve açın. Bu sürüm taşınabilirdir; kurulum veya kaynak kodu indirmek gerekmez. Windows 10/11 x64 ve WebView2 Runtime gerekir. Runtime eksikse [Microsoft'un WebView2 Runtime yükleyicisi](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) ayrıca kurulmalıdır. Runtime hazır olduğunda uygulama işlevleri çevrimdışı çalışır.
 
 Favoriler 1.1.0'dan itibaren Tauri'nin uygulama veri klasöründeki `bant-library.json` dosyasında saklanır. Aynı uygulama kimliğiyle yeni EXE dosyası açıldığında kayıtlar kullanılmaya devam eder. Dosyadaki kurulum kimliği gizli anahtar veya lisans doğrulaması değildir.
 
 Derleme için Rust MSVC, Microsoft C++ Build Tools ve Node.js gerekir. `npm ci` ardından `npm run desktop:build` komutu `src-tauri/target/release/bant.exe` dosyasını oluşturur. GitHub sürümleri Windows üzerinde aynı adımları test ederek otomatik derler. Kaynak kodu edinirken `node_modules`, `dist` ve `src-tauri/target` klasörleri gerekli değildir; bunlar yerel derlemede yeniden oluşur.
 
-EXE henüz kod imzası taşımaz; Windows SmartScreen ilk açılışta uyarı gösterebilir. Release açıklamasındaki SHA-256 değeri indirdiğiniz dosyanın bütünlüğünü kontrol etmek içindir.
+Bu EXE'nin yayıncı imzası yoktur. SmartScreen uyarısı, dosyanın zararlı olduğunu tek başına kanıtlamaz; dosyanın güvenilir yayıncı itibarının henüz oluşmadığını belirtir. Yalnızca yukarıdaki resmî GitHub sürüm bağlantısını kullanın. Sürüm açıklamasındaki SHA-256 değeri indirdiğiniz dosyanın bütünlüğünü karşılaştırmak içindir; yayıncı imzasının yerini tutmaz. Dosyayı çalıştırma kararı kullanıcıya aittir.
 
 ## GitHub için tek dosyalık yükleyici
 
