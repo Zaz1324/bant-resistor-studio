@@ -46,9 +46,19 @@ jobs:
           Copy-Item -LiteralPath 'src-tauri/target/x86_64-pc-windows-msvc/release/bant.exe' -Destination $asset
           if (-not (Test-Path -LiteralPath $asset)) { throw 'EXE oluşturulamadı.' }
           "BANT_ASSET=$asset" | Add-Content -LiteralPath $env:GITHUB_ENV
-          $hash = (Get-FileHash -LiteralPath $asset -Algorithm SHA256).Hash
+
+      - name: İmzasız yeni sürümü engelle
+        shell: pwsh
+        run: |
+          $signature = Get-AuthenticodeSignature -LiteralPath $env:BANT_ASSET
+          if ($signature.Status -ne 'Valid') { throw 'GitHub sürümü için geçerli Authenticode imzası zorunlu.' }
+
+      - name: Sürüm notlarını hazırla
+        shell: pwsh
+        run: |
+          $hash = (Get-FileHash -LiteralPath $env:BANT_ASSET -Algorithm SHA256).Hash
           "SHA-256: $hash" | Set-Content -LiteralPath 'release-notes.txt' -Encoding utf8
-          "Windows 10/11 x64 için taşınabilir sürüm. EXE dosyasını indirip doğrudan çalıştırın. Kurulum gerekmez. WebView2 Runtime gerekir. Favoriler kullanıcı verisi klasöründe korunur.`n`nKod imzası yoktur; Windows ilk açılışta SmartScreen uyarısı gösterebilir.`n" | Add-Content -LiteralPath 'release-notes.txt' -Encoding utf8
+          "Windows 10/11 x64 için taşınabilir sürüm. EXE dosyasını indirip doğrudan çalıştırın. Kurulum gerekmez. WebView2 Runtime gerekir. Favoriler kullanıcı verisi klasöründe korunur.`n`nDosya yayıncı tarafından imzalanmıştır. Yeni dosyalarda SmartScreen uyarısı yine görülebilir.`n" | Add-Content -LiteralPath 'release-notes.txt' -Encoding utf8
 
       - name: GitHub sürümünü yayımla
         shell: pwsh

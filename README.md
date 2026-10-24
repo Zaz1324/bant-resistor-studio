@@ -13,13 +13,19 @@ Tarayıcıda arayüzü görmek için `npm run dev` yeterlidir. PNG kaydetme tara
 
 ## Windows'ta doğrudan kullanma
 
-[Releases](https://github.com/Zaz1324/bant-resistor-studio/releases) bölümünden yalnızca `Bant_1.1.1_x64.exe` dosyasını indirin ve açın. Kurulum veya kaynak kodu indirmek gerekmez. Windows 10/11 x64 ve WebView2 Runtime gerekir; güncel Windows bilgisayarlarda WebView2 genellikle zaten bulunur. Eksikse [Microsoft'un WebView2 Runtime yükleyicisi](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) kurulmalıdır. Uygulama işlevleri çevrimdışı çalışır.
+[Releases](https://github.com/Zaz1324/bant-resistor-studio/releases) bölümündeki en güncel `Bant_*_x64.exe` dosyasını indirin ve açın. Kurulum veya kaynak kodu indirmek gerekmez. Windows 10/11 x64 ve WebView2 Runtime gerekir; güncel Windows bilgisayarlarda WebView2 genellikle zaten bulunur. Eksikse [Microsoft'un WebView2 Runtime yükleyicisi](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) kurulmalıdır. Uygulama işlevleri çevrimdışı çalışır.
 
 Favoriler 1.1.0'dan itibaren Tauri'nin uygulama veri klasöründeki `bant-library.json` dosyasında saklanır. Aynı uygulama kimliğiyle yeni EXE dosyası açıldığında kayıtlar kullanılmaya devam eder. Dosyadaki kurulum kimliği gizli anahtar veya lisans doğrulaması değildir.
 
 Derleme için Rust MSVC, Microsoft C++ Build Tools ve Node.js gerekir. `npm ci` ardından `npm run desktop:build` komutu `src-tauri/target/release/bant.exe` dosyasını oluşturur. GitHub sürümleri Windows üzerinde aynı adımları test ederek otomatik derler. Kaynak kodu edinirken `node_modules`, `dist` ve `src-tauri/target` klasörleri gerekli değildir; bunlar yerel derlemede yeniden oluşur.
 
 EXE henüz kod imzası taşımaz; Windows SmartScreen ilk açılışta uyarı gösterebilir. Release açıklamasındaki SHA-256 değeri indirdiğiniz dosyanın bütünlüğünü kontrol etmek içindir.
+
+## GitHub için tek dosyalık yükleyici
+
+`npm run desktop:installer` Windows'ta kullanıcı hesabına kurulan bir NSIS `-setup.exe` dosyası oluşturur. WebView2 Runtime eksikse yükleyici Microsoft'un küçük çevrimiçi kurucusunu indirir; bu durumda ilk kurulum için internet gerekir. GitHub Actions her `main` güncellemesinde yükleyiciyi **imzasız test adayı** olarak derler ve boyutunu raporlar. Test adayı halka açık sürüm değildir.
+
+GitHub'da yayınlanacak yükleyici ve içindeki uygulama EXE'si güvenilir bir yayıncı sertifikasıyla Authenticode imzalanıp doğrulanmalıdır. Sertifika veya özel anahtar depoya eklenmemelidir. İmzalı yeni dosyalarda da SmartScreen itibarı oluşana kadar uyarı görülebilir; GitHub üzerinden ilk indirmede uyarısız açılış garantisi yoktur.
 
 ## Hesaplama
 

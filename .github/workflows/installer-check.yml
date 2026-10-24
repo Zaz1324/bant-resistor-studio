@@ -1,0 +1,47 @@
+name: Windows installer candidate
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Rust MSVC hedefini hazırla
+        shell: pwsh
+        run: |
+          rustup default stable-x86_64-pc-windows-msvc
+          rustup target add x86_64-pc-windows-msvc
+      - name: Kur ve test et
+        shell: pwsh
+        run: |
+          npm ci
+          npm test
+      - name: NSIS yükleyicisi oluştur
+        shell: pwsh
+        run: npm run desktop:installer -- --target x86_64-pc-windows-msvc --ci
+      - name: Boyutu kaydet
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem -LiteralPath 'src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis' -Filter '*-setup.exe' -File | Select-Object -First 1
+          if (-not $installer) { throw 'NSIS yükleyicisi bulunamadı.' }
+          "Dosya: $($installer.Name)" | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+          "Boyut: $([math]::Round($installer.Length / 1MB, 2)) MiB" | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+          "İmza: henüz yok; yalnızca test adayıdır." | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+      - name: İmzasız test adayını sakla
+        uses: actions/upload-artifact@v4
+        with:
+          name: bant-installer-unsigned-candidate
+          path: src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*-setup.exe
+          if-no-files-found: error
+          retention-days: 7
